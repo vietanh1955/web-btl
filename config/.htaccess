@@ -1,0 +1,13 @@
+# 1. Chặn duyệt danh sách thư mục (Directory Browsing)
+Options -Indexes
+
+# 2. Ngăn truy cập trực tiếp vào các file cấu hình, mã nguồn nhạy cảm
+<FilesMatch "\.(bak|config|env|ini|log|sql)$">
+    Require all denied
+</FilesMatch>
+
+# 3. Chặn truy cập trực tiếp vào thư mục config và includes qua trình duyệt
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(config|includes)/ - [F,L]
+</IfModule>
